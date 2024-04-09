@@ -8,6 +8,9 @@ export const connectDB = async () => {
     const client: mongodb.MongoClient = new mongodb.MongoClient(DATABASE_URL);
     await client.connect();
     const dbConnect: mongodb.Db = client.db(DB_NAME);
+    // await createUserSchema();
+    // createDealershipSchema();
+    // createResetPasswordOTPSchema();
     db = dbConnect;
     console.log("Connected to db");
   } catch (error) {
@@ -15,3 +18,52 @@ export const connectDB = async () => {
     process.exit(1);
   }
 };
+
+// const createUserSchema = async () => {
+//   db.command({
+//     collmod: "User",
+//     validator: {
+//       $jsonSchema: {
+//         bsonType: "object",
+//         required: ["userEmail", "location", "userInfo", "password", "role"],
+//         additionalProperties: false,
+//         properties: {
+//           _id: {},
+//           userEmail: {
+//             bsonType: "string",
+//             description: "'email' is required",
+//           },
+//           location: {
+//             bsonType: "string",
+//             description: "'location' is required",
+//           },
+//           password: {
+//             bsonType: "string",
+//             description: "'password' is required",
+//           },
+//           role: {
+//             bsonType: "string",
+//             description: "'role' is required",
+//           },
+//           userInfo: {
+//             bsonType: "object",
+//             title: "User info validation",
+//             required: ["userName"],
+//             additionalProperties: false,
+//             properties: {
+//               userName: {
+//                 bsonType: "string",
+//                 description: "'userName' is required",
+//               },
+//               userAvatarUrl: {
+//                 bsonType: "string",
+//                 description: "user avatar url",
+//               },
+//             },
+//           },
+//           vehicleInfo: {},
+//         },
+//       },
+//     },
+//   });
+// };

@@ -10,40 +10,47 @@ export class User {
     public location: string,
     public userInfo: { userName: string; userAvatarUrl?: string },
     public password: string,
+    public role: "USER",
     public vehicleInfo?: ObjectId[],
-    public userId?: ObjectId
+    public _id?: ObjectId
   ) {}
 }
 
 export class Dealership {
   constructor(
     public dealershipEmail: string,
-    public dealershipName: string,
     public dealershipLocation: string,
-    public passwordHash: string,
-    public dealershipInfo: any,
-    public cars: ObjectId[],
-    public deals: ObjectId[],
-    public soldVehicles: ObjectId[],
-    public dealershipId?: ObjectId
+    public password: string,
+    public dealershipInfo: {
+      dealershipName: string;
+      dealershipAvatarUrl?: string;
+    },
+    public role: "DEALERSHIP",
+    public car?: ObjectId[],
+    public deals?: ObjectId[],
+    public soldVehicles?: ObjectId[],
+    public _id?: ObjectId
   ) {}
 }
 
-export class Deal {
+export class Deals {
   constructor(
     public dealId: string,
     public carId: string,
-    public dealInfo: any // Assuming deal_info is stored as a JSON object
+    public dealInfo: any
   ) {}
 }
 
-export class Car {
+export class Cars {
   constructor(
-    public carId: string,
+    public make: string,
     public type: string,
-    public name: string,
     public model: string,
-    public carInfo: any
+    public carInfo: {
+      modelYear: string;
+      carImages: string[];
+    },
+    public _id?: ObjectId
   ) {}
 }
 
@@ -61,6 +68,6 @@ export class ResetPasswordOTP {
     public clientEmail: string,
     public reset_otp: string,
     public expires_in: Date,
-    public id?: ObjectId
+    public _id?: ObjectId
   ) {}
 }
